@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const authRoute = require("./routes/auth");
 require("dotenv").config();
+
+app.use(express.json());
 
 // Mongoose Connect
 mongoose
@@ -13,6 +16,8 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log("DB CONNECTION ERROR: ", err));
+
+app.use("/api/auth", authRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
