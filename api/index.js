@@ -1,8 +1,18 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-dotenv.config();
+// Mongoose Connect
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log("DB CONNECTION ERROR: ", err));
 
 app.get("/", (req, res) => {
   res.send("Hello World");
