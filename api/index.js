@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/users");
 require("dotenv").config();
 
 app.use(express.json());
@@ -18,6 +19,7 @@ mongoose
   .catch((err) => console.log("DB CONNECTION ERROR: ", err));
 
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
